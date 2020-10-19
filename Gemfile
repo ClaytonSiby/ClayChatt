@@ -15,6 +15,8 @@ gem 'devise', '~> 4.7', '>= 4.7.3'
 gem 'carrierwave', '~> 2.1'
 
 gem 'mini_magick', '~> 4.10', '>= 4.10.1'
+# webpacker
+gem 'webpacker', github: 'rails/webpacker'
 # Use Puma as the app server
 gem 'puma', '~> 3.11'
 # Use SCSS for stylesheets
