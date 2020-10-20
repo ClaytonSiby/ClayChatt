@@ -11,5 +11,7 @@ class User < ApplicationRecord
     errors.add(:image, 'should be less than 1MB') if image.size > 1.megabytes
   end
 
+  has_many :posts
   has_many :comments
+  has_many :likes, dependent: :destroy
 end
