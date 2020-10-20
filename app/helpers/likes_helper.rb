@@ -1,5 +1,4 @@
 module LikesHelper
-
   private
 
   def type_subject?(params)

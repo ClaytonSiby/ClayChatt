@@ -14,7 +14,7 @@ class CommentsController < ApplicationController
 
       @notification.save
     end
-  
+
     redirect_to @post
   end
 
