@@ -8,4 +8,19 @@ module ApplicationHelper
     user.save
     notice
   end
+
+  # Returns the notification object as parameter along with a type
+  # and returns a User record, Post record, or a Comment record
+  # depending on the type supplied
+
+  def notification_find(notice, type)
+    return User.find(notice.notice_id) if type == 'friendRequest'
+    return Post.find(notice.notice_id) if type == 'comment'
+    return Comment.find(notice.notice_id) if type == 'like-post'
+
+    return unless type == 'like-comment'
+
+    comment = Comment.find(notice.notice_id)
+    Post.find(comment.post_id)
+  end
 end
