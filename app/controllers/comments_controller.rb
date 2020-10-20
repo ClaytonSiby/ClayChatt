@@ -6,6 +6,7 @@ class CommentsController < ApplicationController
   end
 
   def create
+    @post = Post.find(params[:comment][:post_id])
     @comment = current_user.comments.build(comment_params)
 
     if @comment.save
@@ -13,6 +14,7 @@ class CommentsController < ApplicationController
 
       @notification.save
     end
+  
     redirect_to @post
   end
 
