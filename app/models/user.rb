@@ -15,6 +15,9 @@ class User < ApplicationRecord
   has_many :posts
   has_many :comments
   has_many :likes, dependent: :destroy
+
+  # friendship associations
+
   has_many :friend_sent, class_name: :friendship,
                          foreign_key: :sent_by_id,
                          inverse_of: :sent_by,
@@ -33,4 +36,8 @@ class User < ApplicationRecord
 
   has_many :received_requests, -> { merge(Friendship.non_friends) },
            through: :friend_request, source: :sent_by
+
+  # notification associations
+
+  has_many :notifications, dependent: :destroy
 end
