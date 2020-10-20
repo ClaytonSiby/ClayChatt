@@ -28,7 +28,7 @@ class User < ApplicationRecord
                             inverse_of: :sent_to,
                             dependent: :destroy
 
-  has_many :freinds, -> { merge(Friendship.freinds) },
+  has_many :friends, -> { merge(Friendship.freinds) },
            through: :friend_sent, source: :sent_to
 
   has_many :pending_requests, -> { merge(Friendship.non_friends) },
@@ -40,4 +40,36 @@ class User < ApplicationRecord
   # notification associations
 
   has_many :notifications, dependent: :destroy
+
+  # for image uploads
+  mount_uploader :image, PictureUploader
+  validate :picture_size
+
+  # returns a string containing this user's first name & last name
+
+  def full_name
+    "#{firstname} #{lastname}"
+  end
+
+  # returns all posts from this user's friends and self
+
+  def friends_own_posts
+    myfriends = friends
+    our_posts = []
+
+    # add this user's friends' posts to our_posts array
+    myfriends.each do |friend|
+      friend.posts.each do |post|
+        our_posts << post
+      end
+    end
+
+    # add this user's posts to our_posts array
+    posts.each do |post|
+      our_posts << post
+    end
+
+    # return our_posts array.
+    our_posts
+  end
 end
