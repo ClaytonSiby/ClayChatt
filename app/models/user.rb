@@ -10,4 +10,6 @@ class User < ApplicationRecord
   def picture_size
     errors.add(:image, 'should be less than 1MB') if image.size > 1.megabytes
   end
+
+  has_many :comments
 end
