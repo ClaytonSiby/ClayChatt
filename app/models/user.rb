@@ -28,7 +28,7 @@ class User < ApplicationRecord
                             inverse_of: :sent_to,
                             dependent: :destroy
 
-  has_many :friends, -> { merge(Friendship.freinds) },
+  has_many :friends, -> { merge(Friendship.friends) },
            through: :friend_sent, source: :sent_to
 
   has_many :pending_requests, -> { merge(Friendship.non_friends) },
